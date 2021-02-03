@@ -163,6 +163,7 @@ const Home = () => {
                     id="price"
                     name="price"
                     type="number"
+                    step="0.01"
                     ref={register}
                     required={true}
                   />
