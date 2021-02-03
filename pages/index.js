@@ -21,6 +21,8 @@ const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
 
+  const { data, errorData } = useSWR(`/api/transactions`, fetcher);
+
   React.useEffect(() => {
     //console.log(session, loading);
     if (session === null) {
@@ -43,6 +45,53 @@ const Home = () => {
               Transactions
             </a>
           </Link>
+          {errorData ? (
+            <p>Error getting transactions, Please try again!</p>
+          ) : !data ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <div className="flex flex-col gap-8 md:flex-row mb-6">
+                <div className="w-full md:w-1/3 bg-white rounded-sm p-8 shadow-sm">
+                  <h3 className="text-sm font-bold mb-4 text-center md:text-left">
+                    Purchases
+                  </h3>
+                  <p className="text-red-600 font-semibold text-3xl text-center md:text-left">
+                    ${" "}
+                    {data.transactions
+                      .filter((item) => item.transaction_type === "Purchase")
+                      .reduce((acc, item) => acc + item.price, 0)
+                      .toFixed(2)}
+                  </p>
+                </div>
+                <div className="w-full md:w-1/3 bg-white rounded-sm p-8 shadow-sm">
+                  <h3 className="text-sm font-bold mb-4 text-center md:text-left">
+                    Sold
+                  </h3>
+                  <p className="text-green-600 font-semibold text-3xl text-center md:text-left">
+                    ${" "}
+                    {data.transactions
+                      .filter((item) => item.transaction_type === "Sold")
+                      .reduce((acc, item) => acc + item.price, 0)
+                      .toFixed(2)}
+                  </p>
+                </div>
+                <div className="w-full md:w-1/3 bg-white rounded-sm p-8 shadow-sm">
+                  <h3 className="text-sm font-bold mb-4 text-center md:text-left">
+                    Transactions
+                  </h3>
+                  <p className="text-blue-600 font-semibold text-3xl text-center md:text-left">
+                    {data.transactions.length}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full md:max-w-lg bg-white rounded-sm p-8 shadow-sm">
+                <h3 className="text-sm font-bold mb-4 text-center md:text-left">
+                  Sold by Store
+                </h3>
+              </div>
+            </>
+          )}
         </div>
       ) : (
         <LoadingSpinner />

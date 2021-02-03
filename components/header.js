@@ -15,6 +15,9 @@ const Header = () => {
         <div>
           {session && !loading && (
             <>
+              <Link href="/">
+                <a className="mr-6 inline-block">Dashboard</a>
+              </Link>
               <span className="pr-4 font-semibold">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

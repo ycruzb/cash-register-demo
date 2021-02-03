@@ -12,13 +12,15 @@ const TransactionsTable = ({ transactions }) => {
         <>
           <table className="border-collapse w-full">
             <thead className="bg-gray-100">
-              <td className="font-bold p-2">Transaction Type</td>
-              <td className="font-bold p-2">Transaction Number</td>
-              <td className="font-bold p-2">Item ID</td>
-              <td className="font-bold p-2">Item Category</td>
-              <td className="font-bold p-2">Price</td>
-              <td className="font-bold p-2">Date</td>
-              <td className="font-bold p-2">Payment Type</td>
+              <tr>
+                <th className="font-bold p-2 text-left">Transaction Type</th>
+                <th className="font-bold p-2 text-left">Transaction Number</th>
+                <th className="font-bold p-2 text-left">Item ID</th>
+                <th className="font-bold p-2 text-left">Item Category</th>
+                <th className="font-bold p-2 text-left">Price</th>
+                <th className="font-bold p-2 text-left">Date</th>
+                <th className="font-bold p-2 text-left">Payment Type</th>
+              </tr>
             </thead>
             <tbody>
               {transactions.map((transaction) => (
