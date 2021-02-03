@@ -2,12 +2,11 @@ import Head from "next/head";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
-import TransactionTable from "../components/transactionsTable";
 import Link from "next/link";
 import LoadingSpinner from "../components/loadingSpinner";
 import useSWR from "swr";
 
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Legend } from "recharts";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -95,29 +94,22 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-full bg-white rounded-sm p-8 shadow-sm">
+              <div className="w-full md:w-1/2 bg-white rounded-sm p-8 shadow-sm">
                 <h3 className="text-sm font-bold mb-4 text-center md:text-left">
                   Sold by Store
                 </h3>
-                <PieChart width={800} height={400}>
-                  <Pie
-                    data={dataPie}
-                    cx={120}
-                    cy={200}
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {dataPie.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
+                <div className="w-full h-16">
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        dataKey="value"
+                        data={dataPie}
+                        fill="#8884d8"
+                        label
                       />
-                    ))}
-                  </Pie>
-                </PieChart>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
             </>
           )}
