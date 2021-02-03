@@ -4,7 +4,7 @@ export default async (req, res) => {
   let data = req.body;
   data = JSON.parse(data);
 
-  const db = await connectToDatabase(process.env.MONGODB_URI);
+  const db = await connectToDatabase(process.env.DATABASE_URL);
 
   const collection = await db.collection("transactions");
 
