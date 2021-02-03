@@ -7,6 +7,7 @@ import LoadingSpinner from "../components/loadingSpinner";
 import useSWR from "swr";
 
 import {
+  ResponsiveContainer,
   BarChart,
   Bar,
   Cell,
