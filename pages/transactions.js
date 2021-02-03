@@ -21,6 +21,8 @@ const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
 
+  const { data, errorData } = useSWR(`/api/transactions`, fetcher);
+
   React.useEffect(() => {
     //console.log(session, loading);
     if (session === null) {
@@ -38,11 +40,18 @@ const Home = () => {
         <LoadingSpinner />
       ) : session ? (
         <div className="container mx-auto px-4">
-          <Link href="/transactions">
+          <Link href="/transaction/add">
             <a className="inline-block w-auto bg-blue-600 text-white px-4 py-2 rounded-sm hover:bg-blue-700 transition duration-200 ease-linear mb-4">
-              Transactions
+              Add Transaction
             </a>
           </Link>
+          {errorData ? (
+            <p>Error getting transactions, Please try again!</p>
+          ) : !data ? (
+            <TransactionTable transactions={null} />
+          ) : (
+            <TransactionTable transactions={data.transactions} />
+          )}
         </div>
       ) : (
         <LoadingSpinner />

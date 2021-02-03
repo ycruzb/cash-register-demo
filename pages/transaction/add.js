@@ -76,7 +76,7 @@ const Home = () => {
         <LoadingSpinner />
       ) : session ? (
         <div className="container mx-auto px-4">
-          <Link href="/">
+          <Link href="/transactions">
             <a className="inline-block w-auto bg-blue-600 text-white px-4 py-2 rounded-sm hover:bg-blue-700 transition duration-200 ease-linear mb-4">
               View All Transactions
             </a>
