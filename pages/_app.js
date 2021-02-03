@@ -1,7 +1,26 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import { Provider } from "next-auth/client";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Provider
+      options={{
+        clientMaxAge: 0,
+        keepAlive: 0,
+      }}
+      session={pageProps.session}
+    >
+      <>
+        <Header />
+        <main className="py-8 px-4 bg-gray-50">
+          <Component {...pageProps} />
+        </main>
+        <Footer />
+      </>
+    </Provider>
+  );
 }
 
-export default MyApp
+export default MyApp;
