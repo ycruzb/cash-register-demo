@@ -93,7 +93,7 @@ const Home = () => {
                     Transaction Number
                   </label>
                   <input
-                    className="block w-full mb-4 bg-gray-50 p-2"
+                    className="block w-full mb-4 bg-gray-100 p-2"
                     id="transaction_number"
                     name="transaction_number"
                     type="text"
@@ -107,7 +107,7 @@ const Home = () => {
                     Item Id
                   </label>
                   <input
-                    className="block w-full mb-4 bg-gray-50 p-2"
+                    className="block w-full mb-4 bg-gray-100 p-2"
                     id="item_id"
                     name="item_id"
                     type="text"
@@ -121,7 +121,7 @@ const Home = () => {
                     Item Category
                   </label>
                   <select
-                    className="block w-full bg-gray-50 p-2 mb-4"
+                    className="block w-full bg-gray-100 p-2 mb-4"
                     id="item_category"
                     name="item_category"
                     ref={register}
@@ -138,7 +138,7 @@ const Home = () => {
                     Price
                   </label>
                   <input
-                    className="block w-full mb-4 bg-gray-50 p-2"
+                    className="block w-full mb-4 bg-gray-100 p-2"
                     id="price"
                     name="price"
                     type="text"
@@ -152,7 +152,7 @@ const Home = () => {
                     Date
                   </label>
                   <input
-                    className="block w-full mb-4 bg-gray-50 p-2"
+                    className="block w-full mb-4 bg-gray-100 p-2"
                     id="date"
                     name="date"
                     type="date"
@@ -166,7 +166,7 @@ const Home = () => {
                     Payment Type
                   </label>
                   <select
-                    className="block w-full bg-gray-50 p-2 mb-4"
+                    className="block w-full bg-gray-100 p-2 mb-4"
                     id="payment_type"
                     name="payment_type"
                     ref={register}

@@ -89,7 +89,7 @@ export default function SignUp() {
             Name
           </label>
           <input
-            className="block w-full mb-4 bg-gray-50 p-2"
+            className="block w-full mb-4 bg-gray-100 p-2"
             id="name"
             name="name"
             type="text"
@@ -101,7 +101,7 @@ export default function SignUp() {
             Last Name
           </label>
           <input
-            className="block w-full mb-4 bg-gray-50 p-2"
+            className="block w-full mb-4 bg-gray-100 p-2"
             id="lastname"
             name="lastname"
             type="text"
@@ -113,7 +113,7 @@ export default function SignUp() {
             Phone
           </label>
           <input
-            className="block w-full mb-4 bg-gray-50 p-2"
+            className="block w-full mb-4 bg-gray-100 p-2"
             id="phone"
             name="phone"
             ref={register}
@@ -124,7 +124,7 @@ export default function SignUp() {
             Email
           </label>
           <input
-            className="block w-full mb-4 bg-gray-50 p-2"
+            className="block w-full mb-4 bg-gray-100 p-2"
             id="email"
             name="email"
             type="email"
@@ -136,7 +136,7 @@ export default function SignUp() {
             Password
           </label>
           <input
-            className="block w-full bg-gray-50 p-2 mb-4"
+            className="block w-full bg-gray-100 p-2 mb-4"
             id="password"
             name="password"
             type="password"
@@ -153,7 +153,7 @@ export default function SignUp() {
           {!data && <p className="p-2 mb-4">Loading stores, please wait...</p>}
           {data && (
             <select
-              className="block w-full bg-gray-50 p-2 mb-4"
+              className="block w-full bg-gray-100 p-2 mb-4"
               id="store_id"
               name="store_id"
               ref={register}

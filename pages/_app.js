@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
     >
       <>
         <Header />
-        <main className="py-8 px-4 bg-gray-50">
+        <main className="py-8 px-4 bg-gray-100">
           <Component {...pageProps} />
         </main>
         <Footer />

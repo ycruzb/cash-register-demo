@@ -39,7 +39,7 @@ export default function SignIn({ csrfToken, signinFail }) {
             Email
           </label>
           <input
-            className="block w-full mb-4 bg-gray-50 p-2"
+            className="block w-full mb-4 bg-gray-100 p-2"
             id="email"
             name="email"
             type="email"
@@ -49,7 +49,7 @@ export default function SignIn({ csrfToken, signinFail }) {
             Password
           </label>
           <input
-            className="block w-full bg-gray-50 p-2 mb-4"
+            className="block w-full bg-gray-100 p-2 mb-4"
             id="password"
             name="password"
             type="password"
