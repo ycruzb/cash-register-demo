@@ -87,6 +87,25 @@ const Home = () => {
               <div className="grid grid-cols-2 gap-6">
                 <div className="">
                   <label
+                    htmlFor="transaction_type"
+                    className="block w-full mb-2"
+                  >
+                    Transaction Type
+                  </label>
+                  <select
+                    className="block w-full bg-gray-100 p-2 mb-4"
+                    id="transaction_type"
+                    name="transaction_type"
+                    ref={register}
+                    required={true}
+                  >
+                    <option value="Purchase">Purchase</option>
+                    <option value="Sold">Sold</option>
+                  </select>
+                </div>
+
+                <div className="">
+                  <label
                     htmlFor="transaction_number"
                     className="block w-full mb-2"
                   >
@@ -189,7 +208,7 @@ const Home = () => {
                 name="store_id"
                 value={session.user.store_id}
               />
-              <div className="w-full flex justify-end">
+              <div className="w-full flex justify-start">
                 <Button
                   type="submit"
                   text={!sending ? "Add" : "Sending..."}

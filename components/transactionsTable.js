@@ -12,6 +12,7 @@ const TransactionsTable = ({ transactions }) => {
         <>
           <table className="border-collapse w-full">
             <thead className="bg-gray-100">
+              <td className="font-bold p-2">Transaction Type</td>
               <td className="font-bold p-2">Transaction Number</td>
               <td className="font-bold p-2">Item ID</td>
               <td className="font-bold p-2">Item Category</td>
@@ -22,6 +23,15 @@ const TransactionsTable = ({ transactions }) => {
             <tbody>
               {transactions.map((transaction) => (
                 <tr key={transaction._id}>
+                  <td
+                    className={
+                      transaction.transaction_type == "Purchase"
+                        ? "p-2 text-red-600"
+                        : "p-2 text-green-600"
+                    }
+                  >
+                    {transaction.transaction_type}
+                  </td>
                   <td className="p-2">{transaction.transaction_number}</td>
                   <td className="p-2">{transaction.item_id}</td>
                   <td className="p-2">{transaction.item_category}</td>
