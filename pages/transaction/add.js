@@ -188,7 +188,7 @@ const Home = () => {
                 <Button
                   type="submit"
                   text={!sending ? "Sign Up" : "Sending..."}
-                  disabled={sending || errorData || !data}
+                  disabled={sending}
                   onClick={null}
                   widthClass="w-auto mt-4"
                 />
