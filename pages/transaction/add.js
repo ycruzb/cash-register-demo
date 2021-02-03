@@ -34,6 +34,7 @@ const Home = () => {
       // chequear la data aqui y si viene error asignarlo y mostrarlo sino redirigir a login
       //console.log(res);
       setSending(false);
+      e.target.reset();
 
       setNotificationMessage("Transaction added successfully!");
       setNotificationColor("bg-green-600");
@@ -41,8 +42,6 @@ const Home = () => {
 
       setTimeout(() => {
         setShowNotification(false);
-        // clear the form here
-        e.target.reset();
       }, 3000);
     } else {
       setSending(false);

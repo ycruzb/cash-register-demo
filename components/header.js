@@ -21,7 +21,7 @@ const Header = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  className="w-12 inline-block"
+                  className="w-4 inline-block"
                 >
                   <path
                     strokeLinecap="round"
