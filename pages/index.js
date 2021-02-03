@@ -47,6 +47,8 @@ const Home = () => {
           </Link>
           {errorData ? (
             <p>Error getting transactions, Please try again!</p>
+          ) : !data ? (
+            <TransactionTable transactions={null} />
           ) : (
             <TransactionTable transactions={data.transactions} />
           )}
