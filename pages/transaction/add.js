@@ -25,6 +25,8 @@ const Home = () => {
   const onSubmit = async (data, e) => {
     setSending(true);
 
+    data.price = parseFloat(data.price);
+
     const res = await fetch("/api/transaction/add", {
       method: "post",
       body: JSON.stringify(data),
@@ -160,7 +162,7 @@ const Home = () => {
                     className="block w-full mb-4 bg-gray-100 p-2"
                     id="price"
                     name="price"
-                    type="text"
+                    type="number"
                     ref={register}
                     required={true}
                   />
