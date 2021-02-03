@@ -99,11 +99,7 @@ const Home = () => {
                 <h3 className="text-sm font-bold mb-4 text-center md:text-left">
                   Sold by Store
                 </h3>
-                <PieChart
-                  width={800}
-                  height={400}
-                  onMouseEnter={this.onPieEnter}
-                >
+                <PieChart width={800} height={400}>
                   <Pie
                     data={dataPie}
                     cx={120}
