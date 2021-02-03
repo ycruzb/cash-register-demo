@@ -7,6 +7,8 @@ import Link from "next/link";
 import LoadingSpinner from "../components/loadingSpinner";
 import useSWR from "swr";
 
+import { PieChart, Pie, Sector, Cell } from "recharts";
+
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
@@ -20,6 +22,14 @@ const fetcher = async (url) => {
 const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
+
+  const dataPie = [
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 },
+  ];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const { data, errorData } = useSWR(`/api/transactions`, fetcher);
 
@@ -85,10 +95,33 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-full md:max-w-lg bg-white rounded-sm p-8 shadow-sm">
+              <div className="w-full bg-white rounded-sm p-8 shadow-sm">
                 <h3 className="text-sm font-bold mb-4 text-center md:text-left">
                   Sold by Store
                 </h3>
+                <PieChart
+                  width={800}
+                  height={400}
+                  onMouseEnter={this.onPieEnter}
+                >
+                  <Pie
+                    data={dataPie}
+                    cx={120}
+                    cy={200}
+                    innerRadius={60}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                </PieChart>
               </div>
             </>
           )}
