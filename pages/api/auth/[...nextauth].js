@@ -54,6 +54,8 @@ export default NextAuth({
 
       if (userDB) {
         session.user.lastname = userDB.lastname;
+        session.user.user_id = userDB._id;
+        session.user.store_id = userDB.store_id;
       }
 
       return Promise.resolve(session);

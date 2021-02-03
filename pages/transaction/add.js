@@ -5,14 +5,54 @@ import React from "react";
 import Link from "next/link";
 import Button from "../../components/button";
 import { useForm } from "react-hook-form";
+import LoadingSpinner from "../../components/loadingSpinner";
 
 const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
-  const [transactions, setTransactions] = React.useState([]);
+
+  const [sending, setSending] = React.useState(false);
+  const [showNotification, setShowNotification] = React.useState(false);
+  const [notificationColor, setNotificationColor] = React.useState(
+    "bg-green-600"
+  );
+  const [notificationMessage, setNotificationMessage] = React.useState(
+    "Transaction added successfully!"
+  );
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => alert(JSON.stringify(data));
+  const onSubmit = async (data, e) => {
+    setSending(true);
+
+    const res = await fetch("/api/transaction/add", {
+      method: "post",
+      body: JSON.stringify(data),
+    });
+
+    if (res.status === 200) {
+      // chequear la data aqui y si viene error asignarlo y mostrarlo sino redirigir a login
+      //console.log(res);
+      setSending(false);
+
+      setNotificationMessage("Transaction added successfully!");
+      setNotificationColor("bg-green-600");
+      setShowNotification(true);
+
+      setTimeout(() => {
+        setShowNotification(false);
+        // clear the form here
+        e.target.reset();
+      }, 3000);
+    } else {
+      setSending(false);
+      setNotificationMessage("Error, fill the form properly!");
+      setShowNotification(true);
+
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 4000);
+    }
+  };
 
   React.useEffect(() => {
     //console.log(session, loading);
@@ -28,28 +68,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {loading ? (
-        <div className="w-full flex justify-center align-middle">
-          <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600 mx-auto block"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            ></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-        </div>
+        <LoadingSpinner />
       ) : session ? (
         <div className="container mx-auto px-4">
           <Link href="/">
@@ -153,11 +172,23 @@ const Home = () => {
                   </select>
                 </div>
               </div>
+              <input
+                type="hidden"
+                ref={register}
+                name="user_id"
+                value={session.user.user_id}
+              />
+              <input
+                type="hidden"
+                ref={register}
+                name="store_id"
+                value={session.user.store_id}
+              />
               <div className="w-full flex justify-end">
                 <Button
                   type="submit"
-                  text={"Add"}
-                  disabled={false}
+                  text={!sending ? "Sign Up" : "Sending..."}
+                  disabled={sending || errorData || !data}
                   onClick={null}
                   widthClass="w-auto mt-4"
                 />
@@ -166,7 +197,7 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <p className="w-full text-center">Loading...</p>
+        <LoadingSpinner />
       )}
     </>
   );
