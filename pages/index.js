@@ -5,11 +5,23 @@ import React from "react";
 import TransactionTable from "../components/transactionsTable";
 import Link from "next/link";
 import LoadingSpinner from "../components/loadingSpinner";
+import useSWR from "swr";
+
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (res.status !== 200) {
+    throw new Error(data.message);
+  }
+  return data;
+};
 
 const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
-  const [transactions, setTransactions] = React.useState([]);
+
+  const { data, errorData } = useSWR(`/api/transactions`, fetcher);
 
   React.useEffect(() => {
     //console.log(session, loading);
@@ -33,7 +45,11 @@ const Home = () => {
               Add Transaction
             </a>
           </Link>
-          <TransactionTable transactions={transactions} />
+          {errorData ? (
+            <p>Error getting transactions, Please try again!</p>
+          ) : (
+            <TransactionTable transactions={data.transactions} />
+          )}
         </div>
       ) : (
         <LoadingSpinner />
