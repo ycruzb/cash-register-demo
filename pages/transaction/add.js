@@ -6,6 +6,7 @@ import Link from "next/link";
 import Button from "../../components/button";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "../../components/loadingSpinner";
+import Notification from "../../components/notification";
 
 const Home = () => {
   const router = useRouter();
@@ -67,6 +68,11 @@ const Home = () => {
         <title>Add Transaction | CURB Cash Register Demo</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Notification
+        text={notificationMessage}
+        bgColor={notificationColor}
+        show={showNotification}
+      />
       {loading ? (
         <LoadingSpinner />
       ) : session ? (
@@ -187,7 +193,7 @@ const Home = () => {
               <div className="w-full flex justify-end">
                 <Button
                   type="submit"
-                  text={!sending ? "Sign Up" : "Sending..."}
+                  text={!sending ? "Add" : "Sending..."}
                   disabled={sending}
                   onClick={null}
                   widthClass="w-auto mt-4"
