@@ -16,7 +16,10 @@ const Header = () => {
           {session && !loading && (
             <>
               <Link href="/">
-                <a className="mr-6 inline-block">Dashboard</a>
+                <a className="mr-4 inline-block">Dashboard</a>
+              </Link>
+              <Link href="/transactions">
+                <a className="mr-6 inline-block">Transactions</a>
               </Link>
               <span className="pr-4 font-semibold">
                 <svg

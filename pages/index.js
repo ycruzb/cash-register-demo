@@ -22,7 +22,7 @@ const Home = () => {
   const router = useRouter();
   const [session, loading] = useSession();
 
-  const { data, errorData } = useSWR(`/api/transactions`, fetcher);
+  const { data, errorData } = useSWR(`/api/dashboard`, fetcher);
 
   React.useEffect(() => {
     //console.log(session, loading);
@@ -41,11 +41,6 @@ const Home = () => {
         <LoadingSpinner />
       ) : session ? (
         <div className="container mx-auto px-4">
-          <Link href="/transactions">
-            <a className="inline-block w-auto bg-blue-600 text-white px-4 py-2 rounded-sm hover:bg-blue-700 transition duration-200 ease-linear mb-4">
-              Transactions
-            </a>
-          </Link>
           {errorData ? (
             <p>Error getting transactions, Please try again!</p>
           ) : !data ? (
@@ -59,10 +54,11 @@ const Home = () => {
                   </h3>
                   <p className="text-red-600 font-semibold text-3xl text-center md:text-left">
                     ${" "}
-                    {data.transactions
+                    {/*data.transactions
                       .filter((item) => item.transaction_type === "Purchase")
                       .reduce((acc, item) => acc + item.price, 0)
-                      .toFixed(2)}
+					.toFixed(2)*/}
+                    {data.totalPurchase[0].total}
                   </p>
                 </div>
                 <div className="w-full md:w-1/3 bg-white rounded-sm p-8 shadow-sm">
@@ -71,10 +67,11 @@ const Home = () => {
                   </h3>
                   <p className="text-green-600 font-semibold text-3xl text-center md:text-left">
                     ${" "}
-                    {data.transactions
+                    {/*data.transactions
                       .filter((item) => item.transaction_type === "Sold")
                       .reduce((acc, item) => acc + item.price, 0)
-                      .toFixed(2)}
+					.toFixed(2)*/}
+                    {data.totalSold[0].total}
                   </p>
                 </div>
                 <div className="w-full md:w-1/3 bg-white rounded-sm p-8 shadow-sm">
@@ -82,7 +79,8 @@ const Home = () => {
                     Transactions
                   </h3>
                   <p className="text-blue-600 font-semibold text-3xl text-center md:text-left">
-                    {data.transactions.length}
+                    {/*data.transactions.length*/}
+                    {data.transactionsCount}
                   </p>
                 </div>
               </div>
@@ -91,7 +89,7 @@ const Home = () => {
                   Sold by Store
                 </h3>
                 <div className="w-full h-96">
-                  <CustomBarChart data={data.transactions} />
+                  <CustomBarChart data={data.storesData} />
                 </div>
               </div>
             </>

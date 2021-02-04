@@ -25,8 +25,6 @@ const Home = () => {
   const onSubmit = async (data, e) => {
     setSending(true);
 
-    data.price = parseFloat(data.price);
-
     const res = await fetch("/api/transaction/add", {
       method: "post",
       body: JSON.stringify(data),
