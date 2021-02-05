@@ -1,29 +1,20 @@
 const connectToDatabase = require("../../../utils/mongoDB");
 var mongo = require("mongodb");
 var ObjectID = mongo.ObjectID;
-import { getSession } from "next-auth/client";
 
 export default async (req, res) => {
-  const session = await getSession({ req });
+  let data = req.body;
+  data = JSON.parse(data);
 
-  if (session) {
-    let data = req.body;
-    data = JSON.parse(data);
+  data.price = parseFloat(data.price);
+  data.store_id = ObjectID(data.store_id);
+  data.user_id = ObjectID(data.user_id);
 
-    data.price = parseFloat(data.price);
-    data.store_id = ObjectID(data.store_id);
-    data.user_id = ObjectID(data.user_id);
+  const db = await connectToDatabase(process.env.DATABASE_URL);
 
-    const db = await connectToDatabase(process.env.DATABASE_URL);
+  const collection = await db.collection("transactions");
 
-    const collection = await db.collection("transactions");
+  const result = await collection.insertOne(data);
 
-    const result = await collection.insertOne(data);
-
-    res.status(200).json({ result });
-  } else {
-    res.send({
-      error: "You must be sign in to view the protected content on this page.",
-    });
-  }
+  res.status(200).json({ result });
 };

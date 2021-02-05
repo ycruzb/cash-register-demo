@@ -1,20 +1,11 @@
 const connectToDatabase = require("../../utils/mongoDB");
-import { getSession } from "next-auth/client";
 
 module.exports = async (req, res) => {
-  const session = await getSession({ req });
+  const db = await connectToDatabase(process.env.DATABASE_URL);
 
-  if (session) {
-    const db = await connectToDatabase(process.env.DATABASE_URL);
+  const collection = await db.collection("transactions");
 
-    const collection = await db.collection("transactions");
+  const transactions = await collection.find({}).toArray();
 
-    const transactions = await collection.find({}).toArray();
-
-    res.status(200).json({ transactions });
-  } else {
-    res.send({
-      error: "You must be sign in to view the protected content on this page.",
-    });
-  }
+  res.status(200).json({ transactions });
 };
